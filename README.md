@@ -1,2 +1,106 @@
 # Smart_Iot_Disaster_Prevention_Office
 + IntelAISW_Project
+# [Intel]AI + SW 아카데미 7기 미니 프로젝트
+## 🚀개요
+### <프로젝트명>
+스마트 & 재난 대비 오피스
+
+### <프로젝트 배경>
+- 스마트 공간의 대중화와 늘어나는 재난(지진, 화재 등)에 대한 불안감
+- 두 가지의 기능(자동화, 재난 대비)을 합쳐 하나의 시스템을 개발
+  
+### <프로젝트 목표>
+- 최대한 다양한 센서와 모듈을 사용해보자
+- 데이터베이스를 자유자재로 다루어보자
+- 범용성이 높은 결과물을 만들어보자
+
+### <Tools>
+#### 보드
+- NUCLEO-F411RE(STM32)
+- Arduino UNO(ATmega328)
+- Raspberry pi 4
+#### 개발 환경
+- STM32CUBEIDE
+- Arduino IDE
+- Vim
+- Maria DB
+#### 주요 모듈 & 센서
+- WiFi 모듈(ESP-01)
+- Bluetooth 모듈(HC-06)
+- RFID 모듈(RFID-RC522)
+- 적외선 송신 모듈(KY-005)
+- 초음파센서(HC-SR04)
+- 서보모터(SG90)
+
+### <구성도>
+![image](https://github.com/user-attachments/assets/d2576e21-3671-4b35-97bd-93a99f41a029)
+<br/><br/>
+## 💡주요기능
+### <🏢 스마트 오피스>
+- 자동문
+  - 초음파 센서 2개와 서보모터 1개를 사용하여 구현
+  - 오피스 ON일 때 작동, OFF일 때는 작동 X
+- 적외선 송신
+  - 적외선 송신기를 사용하여 적외선 수신이 가능한 실제 가전제품을 제어(에어컨, 선풍기 등)
+  - 스마트폰을 사용하여 오피스 외부에서도 가전제품 제어 가능
+  - 가전 제품을 추가하거나 변경하여도 각각의 제품에 맞는 센서 값을 송신할 수 있어 범용성이 높음
+- 전등, 실시간 시간, 온도 화면
+  - LED, 온습도센서, LCD를 사용하여 구현
+- 외부인 침입 감지
+  - 초음파 센서 1개를 사용하여 구현
+  - 오피스 OFF일 때만 센서 작동
+  - 외부인 감지 시 중앙 관리실에 알리고 비상 알람 울림
+  - 중앙 관리실에서 관리인이 확인 후 관리자 키를 사용해 상황 종료 가능
+- 비상 알람벨
+  - 외부인 감지 시, 재난 상황 발생 시에 비상 알람음이 울림
+  
+### <⚠️ 재난 대비>
+- 지진 감지
+  - 기울임 센서를 사용하여 구현
+  - 지진 감지 시 모든 오피스 사용자와 중앙 관리실에 지진 알림
+  - 모든 오피스 문 자동 개방, 가스 차단, 모든 전기 기구 차단
+- 화재 감지
+  - 가스 감지 센서와 화염 감지 센서를 사용하여 구현
+  - 가스 감지 센서나 화염 감지 센서 둘 중 하나라도 기준치 이상이면 화재 발생
+  - 화재 발생 감지 시 모든 오피스 사용자와 중앙 관리실에 지진 알림
+  - 모든 오피스 문 자동 개방, 가스 차단, 모든 전기 기구 차단
+- 전기 차단
+  - 릴레이 모듈을 사용하여 220V 전압 제어 구현
+  - 스마트 오피스 모듈과 소켓 통신을 통해 전기 차단
+  - 오피스 사용자가 스마트폰으로 원격 제어 가능
+- 가스 차단
+  - 서보모터을 사용하여 구현
+  - 오피스 사용자가 스마트폰으로 원격 제어 가능
+  
+### <🎛️ 중앙 관리실>
+- 오피스 전체 통체 서버 및 DB
+  - 라즈베리 파이를 통해 오피스 & 중앙 관리실 & 사용자 간의 통신 서버 구축
+  - 라즈베리 파이에서 Maria DB를 통해 오피스 별 인원수 및 현재 상태 정보 DB 구축
+- 인원 출입 관리
+  - RFID 모듈을 사용하여 구현
+  - DB와 연동하여 오피스 마다 현재 인원 수 및 유무 판단, 등록 여부 확인
+  - 오피스에 1명 이상일 때 오피스 ON, 0명일 때 OFF 판단
+- 오피스 별 상황 확인 및 통제 
+  - 외부인 침입 혹은 지진, 화재 발생 시 오피스 별 상황 LCD에 표시
+  - 외부인 침입 상황 시
+    - 관리자가 확인 후 RFID 모듈에 등록 된 관리자 카드 키 인식 시 상황 종료
+
+### <🔨 기능 흐름도>
+![image](https://github.com/user-attachments/assets/bd80b24f-d8ee-4917-8079-ddd2d14acd8e)
+<br/><br/>
+## 📌 주요 코드
+- [스마트오피스](https://github.com/KINGMINWOO/intel_1st_miniproject/blob/main/1.%EC%BD%94%EB%93%9C/STM32/KMS_mini_project/Core/Src/main.c)  
+- [재난 대비](https://github.com/KINGMINWOO/intel_1st_miniproject/blob/main/1.%EC%BD%94%EB%93%9C/STM32/MiniProject_Gas_Fire_Vibration_wifi_PWM/Core/Src/main.c)  
+- [중앙 관리실 - DB 관리](https://github.com/KINGMINWOO/intel_1st_miniproject/blob/main/1.%EC%BD%94%EB%93%9C/Raspberry%20Pi/mini_client_device.c)  
+- [중앙 관리실 - 메인 서버](https://github.com/KINGMINWOO/intel_1st_miniproject/blob/main/1.%EC%BD%94%EB%93%9C/Raspberry%20Pi/mini_server.c)
+<br/><br/>
+## ✊향후 계획
+1. 서버의 잦은 Segmentation Fault 개선
+2. WiFi 모듈 안정화
+3. STM32 보드에서 RFID 모듈 사용 구현
+4. 연동되는 사용자 어플 개발
+5. 현재는 오피스 내부 이곳저곳에 센서를 장착하는 형태 -> 하나의 모듈(제품) 형태로 구성하여 설치만 하면 되는 형태로 구현
+<br/><br/>
+## 🙏제작자
+- [김민우](http://github.com/KINGMINWOO)
+- [김민수](http://github.com/GaSap58)
