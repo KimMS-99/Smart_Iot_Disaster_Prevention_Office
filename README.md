@@ -1,1 +1,2 @@
-# mini_test
+# Smart_Iot_Disaster_Prevention_Office
++ IntelAISW_Project
