@@ -90,9 +90,9 @@
 <br/><br/>
 ## 📌 주요 코드
 - [스마트오피스](./Stm32/Smart_Iot_Office/Core/Src/main.c)  
-- [재난 대비](https://github.com/KINGMINWOO/intel_1st_miniproject/blob/main/1.%EC%BD%94%EB%93%9C/STM32/MiniProject_Gas_Fire_Vibration_wifi_PWM/Core/Src/main.c)  
-- [중앙 관리실 - DB 관리](https://github.com/KINGMINWOO/intel_1st_miniproject/blob/main/1.%EC%BD%94%EB%93%9C/Raspberry%20Pi/mini_client_device.c)  
-- [중앙 관리실 - 메인 서버](https://github.com/KINGMINWOO/intel_1st_miniproject/blob/main/1.%EC%BD%94%EB%93%9C/Raspberry%20Pi/mini_server.c)
+- [재난 대비](./Stm32/Disaster_Prevention_Office/Core/Src/main.c)  
+- [중앙 관리실 - DB 관리](./RaspberryPi/mini_client_device.c)  
+- [중앙 관리실 - 메인 서버](./RaspberryPi/mini_server.c)
 <br/><br/>
 ## ✊향후 계획
 1. 서버의 잦은 Segmentation Fault 개선
