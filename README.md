@@ -1,5 +1,3 @@
-# Smart_Iot_Disaster_Prevention_Office
-+ IntelAISW_Project
 # [Intel]AI + SW 아카데미 7기 미니 프로젝트
 ## 🚀개요
 ### <프로젝트명>
