@@ -997,19 +997,19 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	{
 		if(is_first_captured == 0)
 		{
-			ic_val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
+			ic_val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2); // 상승 에지 시간 저장
 			is_first_captured = 1;
-			__HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_2, TIM_INPUTCHANNELPOLARITY_FALLING);
+			__HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_2, TIM_INPUTCHANNELPOLARITY_FALLING); // 다음은 하강 에지 캡처
 		}
 		else
 		{
-			ic_val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
-			uint32_t diff = ic_val2 - ic_val1;
-			distance = (diff * 0.0343) / 2;
+			ic_val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2); // 하강 에지 시간 저장
+			uint32_t diff = ic_val2 - ic_val1; // 펄스 폭 계산 (시간 차)
+			distance = (diff * 0.0343) / 2; // 거리 계산
 			HC_flag1 = 1;
 			is_first_captured = 0;
-			__HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_2, TIM_INPUTCHANNELPOLARITY_RISING);
-			HAL_TIM_IC_Stop_IT(htim, TIM_CHANNEL_2);
+			__HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_2, TIM_INPUTCHANNELPOLARITY_RISING); // 다시 상승 에지 캡처로 설정
+			HAL_TIM_IC_Stop_IT(htim, TIM_CHANNEL_2); // 캡처 인터럽트 종료
 		}
 	}
 
@@ -1165,3 +1165,4 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+
